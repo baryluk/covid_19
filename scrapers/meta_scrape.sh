@@ -26,7 +26,7 @@
 
 for s in ./scrape_??.py;
 do
-  L=$(./$s | ./parse_scrape_output.py)
+  L=$(./$s | ./parse_scrape_output.py | tail -n 1)
   if ! echo "${L}" | egrep ' (OK|FAILED)' >/dev/null; then
     a=$(echo "$s" | sed -E -e 's/^.*scrape_(..)\..*$/\1/' | tr a-z A-Z) # ' # To make my editor happy.
     echo "$a" - - - FAILED "$(date --iso-8601=seconds)"
